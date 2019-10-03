@@ -1,10 +1,10 @@
 import React from 'react';
-import Results from './components/Results.js';
+import Result from './components/Result.js';
 
 function App() {
   return (
     <div>
-    <Results />
+    <Result />
     </div>
   );
 }
