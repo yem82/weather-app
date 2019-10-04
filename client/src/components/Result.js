@@ -1,39 +1,46 @@
 import React, { Component } from 'react';
 import Form from './Form.js';
+import Weather from './Weather';
 import axios from 'axios';
 
 class Result extends Component {
   state = {
-    weatherDescription: ''
+    temperature: null,
+    humidity: null,
+    wind: null,
+    weatherDescription: null
   }
 
-  handleChange = (e) => {
-    this.setState({[e.target.name]: e.target.value})
-  }
-
-  getResults = async (e) =>  {
+  getWeather = async (e) =>  {
     e.preventDefault();
 
-    const { city, country } = this.state;
+    const city = e.target.city.value, country = e.target.country.value
     const formData = await axios.get(`/weather/${city}/${country}`)
-    console.log(formData.data.data)
-    const cityWeather = formData.data.data.weather
-    const weatherDescription = cityWeather.map(weather => weather.description)
-    this.setState({weatherDescription})
+    const weatherData = await formData.data.data; console.log(weatherData)
+
+    this.setState({city: weatherData.name,
+      country: weatherData.sys.country,
+      weatherDescription: weatherData.weather[0].description,
+      temperature: Math.round(weatherData.main.temp),
+      humidity: weatherData.main.humidity,
+      wind: weatherData.wind.speed
+    })
   }
 
   render() {
-    const {city, country, weatherDescription} = this.state
+    const {city, country, temperature, humidity, wind, weatherDescription} = this.state
     return(
       <div>
-        <p>Enter a city and country to display weather</p>
-        <Form getResults={this.getResults} handleChange={this.handleChange} />
+        <Form getWeather={this.getWeather} />
         <p>Results:</p>
-        <ul>
-        <li>City: {city}</li>
-        <li>Country: {country}</li>
-        <li>Weather Description: {weatherDescription}</li>
-        </ul>
+        <Weather
+          city={city}
+          country={country}
+          humidity={humidity}
+          temperature={temperature}
+          wind={wind}
+          weatherDescription={weatherDescription}
+        />
       </div>
     )
   }
