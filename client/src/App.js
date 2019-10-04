@@ -4,7 +4,7 @@ import Result from './components/Result.js';
 function App() {
   return (
     <div>
-    <Result />
+      <Result />
     </div>
   );
 }

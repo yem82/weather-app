@@ -2,7 +2,12 @@ import React from 'react';
 
 const Weather = props => (
   <div>
-   {
+  {
+    props.error && <p>
+      <span>{props.error}</span>
+    </p>
+  }
+  {
      props.city && props.country && <p>
      <span>{props.city}, {props.country}</span>
    </p>
