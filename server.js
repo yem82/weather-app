@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import 'dotenv/config';
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.get('/weather/:city/:country', async (req, res) => {
   const formData = `${req.params.city},${req.params.country}`
