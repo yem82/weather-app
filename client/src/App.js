@@ -1,10 +1,10 @@
 import React from 'react';
-import Result from './components/Result.js';
+import WeatherData from './components/WeatherData';
 
 function App() {
   return (
     <div>
-      <Result />
+      <WeatherData />
     </div>
   );
 }

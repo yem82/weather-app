@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import App from './App';
-import Result from './components/Result'
+import WeatherData from './components/WeatherData'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
 <App>
   <Router>
-  <Route exact path="/weather" component={Result} />
+  <Route exact path="/weather" component={WeatherData} />
   </Router>
 </App>
 , document.getElementById('root')

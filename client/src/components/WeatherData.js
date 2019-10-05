@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Form from './Form.js';
-import Weather from './Weather.js';
+import Form from './Form';
+import Weather from './Weather';
 import axios from 'axios';
 
 class Result extends Component {
@@ -12,31 +12,31 @@ class Result extends Component {
     error: null,
   }
 
-  getWeather = async (e) =>  {
+  getWeather = async (e) => {
     e.preventDefault();
     try {
     const city = e.target.city.value, country = e.target.country.value
     const formData = await axios.get(`/weather/${city}/${country}`)
     const weatherData = formData.data.data; console.log(weatherData)
-      if(city && country){
-      this.setState({city: weatherData.name,
+      if(city && country) {
+        this.setState({city: weatherData.name,
         country: weatherData.sys.country,
         weatherDescription: weatherData.weather[0].description,
         temperature: Math.round(weatherData.main.temp),
         humidity: weatherData.main.humidity,
         wind: weatherData.wind.speed,
         error: null
-      })
+        })
       }
     } catch(err) {
       console.log(err)
-      this.setState({error: 'Error: invalid city or country provided',
-        city: null,
+      this.setState({city: null,
         country: null,
         weatherDescription: null,
         temperature: null,
         humidity: null,
-        wind: null
+        wind: null,
+        error: 'Error: invalid city or country provided'
       })
      }
   }
@@ -44,8 +44,10 @@ class Result extends Component {
   render() {
     const {city, country, weatherDescription,
       temperature, humidity, wind, error} = this.state
-    return(
+    return (
       <div>
+        <div className="main">
+        <div className="container">
         <Form getWeather={this.getWeather} />
         <p>Results:</p>
         <Weather
@@ -57,6 +59,8 @@ class Result extends Component {
           wind={wind}
           error={error}
         />
+        </div>
+        </div>
       </div>
     )
   }

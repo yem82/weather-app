@@ -13,6 +13,14 @@ app.get('/weather/:city/:country', async (req, res) => {
   res.send({data})
 });
 
+const path = require('path')
+
+app.use(express.static(path.join(__dirname, 'client/build')))
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
+
 app.listen(PORT, () => {
   console.log(`auto baby on ${PORT}!`);
 });

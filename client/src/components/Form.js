@@ -10,7 +10,6 @@ const Form = props => (
       <input
       type="text"
       name="city"
-      onChange={props.handleChange}
       />
     </div>
     <div>
@@ -18,7 +17,6 @@ const Form = props => (
       <input
       type="text"
       name="country"
-      onChange={props.handleChange}
       />
     </div>
     <div>
