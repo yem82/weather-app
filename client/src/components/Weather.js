@@ -1,4 +1,5 @@
 import React from 'react';
+import './stylesheets/Weather.scss';
 
 const Weather = props => (
   <div className="weather">
@@ -8,27 +9,34 @@ const Weather = props => (
     </p>
   }
   {
-     props.city && props.country && <p>
-     <span className="location">{props.city}, {props.country}</span>
+    props.icon && <p className="icon">
+      <span>{props.icon}</span>
+    </p>
+  }
+  {
+     props.city && props.country && <p className="location">
+     <span>{props.city}, {props.country}</span>
    </p>
   }
   {
-    props.weatherDescription && <p>
-      <span className="description">{props.weatherDescription}</span>
+    props.weatherDescription && <p className="description">
+      <span>{props.weatherDescription}</span>
     </p>
   }
   {
-    props.temperature && <p>
-      <span className="temperature">{props.temperature}°C</span>
+
+    props.temperature && <p className="temperature">
+      <span>{props.temperature}°C</span>
     </p>
+
   }
   {
-    props.humidity && <p className="key"> Humidity:
+    props.humidity && <p className="key-1"> humidity:
       <span className="humidity">{props.humidity}%</span>
     </p>
   }
   {
-    props.wind && <p className="key"> Wind:
+    props.wind && <p className="key-2"> wind:
       <span className="wind">{props.wind} mph</span>
     </p>
   }

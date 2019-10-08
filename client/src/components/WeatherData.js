@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Form from './Form';
+import './stylesheets/WeatherData.scss';
 import Weather from './Weather';
 import axios from 'axios';
 
 class Result extends Component {
   state = {
     weatherDescription: null,
+    icon: null,
     temperature: null,
     humidity: null,
     wind: null,
@@ -18,10 +20,12 @@ class Result extends Component {
     const city = e.target.city.value, country = e.target.country.value
     const formData = await axios.get(`/weather/${city}/${country}`)
     const weatherData = formData.data.data; console.log(weatherData)
+    const imageUrl = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
       if(city && country) {
         this.setState({city: weatherData.name,
         country: weatherData.sys.country,
-        weatherDescription: weatherData.weather[0].description,
+        weatherDescription: weatherData.weather[0].main,
+        icon: <img height="180px" src={imageUrl} alt="weathericon"></img>,
         temperature: Math.round(weatherData.main.temp),
         humidity: weatherData.main.humidity,
         wind: weatherData.wind.speed,
@@ -33,34 +37,31 @@ class Result extends Component {
       this.setState({city: null,
         country: null,
         weatherDescription: null,
+        icon: null,
         temperature: null,
         humidity: null,
         wind: null,
-        error: 'Error: invalid city or country provided'
+        error: 'Please recheck the city or country provided'
       })
      }
   }
 
   render() {
-    const {city, country, weatherDescription,
+    const {city, country, weatherDescription, icon,
       temperature, humidity, wind, error} = this.state
     return (
       <div>
-        <div className="main">
-        <div className="container">
         <Form getWeather={this.getWeather} />
-        <p>Results:</p>
         <Weather
           city={city}
           country={country}
           weatherDescription={weatherDescription}
+          icon={icon}
           temperature={temperature}
           humidity={humidity}
           wind={wind}
           error={error}
         />
-        </div>
-        </div>
       </div>
     )
   }

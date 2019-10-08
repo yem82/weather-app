@@ -1,0 +1,24 @@
+.prompt {
+  text-align: center;
+  transform: translate(0em, 23em);
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  transform: translate(6em, 26em);
+
+  input {
+    color: red;
+    transform: translate(-7em, 3em);
+  }
+}
+
+.city-label {
+  margin-left: 2px;
+  transform: translate(0em, 4em);
+}
+
+button {
+  transform: translate(-24em, 10em);
+}
