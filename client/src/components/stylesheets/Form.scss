@@ -9,8 +9,11 @@ form {
   transform: translate(6em, 26em);
 
   input {
-    color: red;
     transform: translate(-7em, 3em);
+    border: none;
+    background: none;
+    outline: none;
+    border-bottom: 1px solid gray;
   }
 }
 

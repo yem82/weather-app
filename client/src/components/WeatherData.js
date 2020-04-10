@@ -19,16 +19,16 @@ class Result extends Component {
     try {
     const city = e.target.city.value, country = e.target.country.value
     const formData = await axios.get(`/weather/${city}/${country}`)
-    const weatherData = formData.data.data; console.log(weatherData)
-    const imageUrl = `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
+    const weatherInfo = formData.data.weatherData; console.log(formData.data.weatherData)
+    const imageUrl = `http://openweathermap.org/img/wn/${weatherInfo.weatherIcon}@2x.png`
       if(city && country) {
-        this.setState({city: weatherData.name,
-        country: weatherData.sys.country,
-        weatherDescription: weatherData.weather[0].main,
+        this.setState({city: weatherInfo.city,
+        country: weatherInfo.country,
+        weatherDescription: weatherInfo.description,
         icon: <img height="180px" src={imageUrl} alt="weathericon"></img>,
-        temperature: Math.round(weatherData.main.temp),
-        humidity: weatherData.main.humidity,
-        wind: weatherData.wind.speed,
+        temperature: weatherInfo.temperature,
+        humidity: weatherInfo.humidity,
+        wind: weatherInfo.windSpeed,
         error: null
         })
       }
